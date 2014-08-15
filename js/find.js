@@ -2,8 +2,8 @@ var lat = "";
 var lon = "";
 function display(lat, lon) {
   $('#panel').removeClass('hidden');
-  $('#longitude').text(longitude);
-  $('#latitude').text(latitude);
+  $('#longitude').text(lon);
+  $('#latitude').text(lat);
 };
 
 function clicked() {

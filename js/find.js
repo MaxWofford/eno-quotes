@@ -23,6 +23,7 @@ function success(pos) {
 };
 
 function error(err) {
+  $('#panel').removeClass('hidden');
   console.warn('ERROR(' + err.code + '): ' + err.message);
   $('#notice').text('ERROR(' + err.code + '): ' + err.message);
 };

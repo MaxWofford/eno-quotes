@@ -8,8 +8,14 @@ var options = {
 
 function success(pos) {
   var crd = pos.coords;
-  $('#longitude').text(crd.longitude + " longitude");
-  $('#latitude').text(crd.latitude + " latitude");
+  $('#panel').removeClass('hidden');
+  if (isNaN(crd.longitude)) {
+    $('#notice').text("Something went wrong");
+  } else{
+    $('#notice').text("Something worked");
+    $('#longitude').text(crd.longitude + " longitude");
+    $('#latitude').text(crd.latitude + " latitude");
+  };
   console.log('Your current position is:');
   console.log('Latitude : ' + crd.latitude);
   console.log('Longitude: ' + crd.longitude);

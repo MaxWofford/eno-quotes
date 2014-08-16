@@ -1,18 +1,33 @@
-var lat = "";
-var lon = "";
-function display(lat, lon) {
-  $('#panel').removeClass('hidden');
-  $('#longitude').text(lon);
-  $('#latitude').text(lat);
+
+// Initialization stuff
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
 };
 
+function success(pos) {
+  var crd = pos.coords;
+  $('#longitude').text(crd.longitude + " longitude");
+  $('#latitude').text(crd.latitude + " latitude");
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+  $('#notice').text('ERROR(' + err.code + '): ' + err.message);
+};
+
+// onClick
 function clicked() {
   if ("geolocation" in navigator) {
-    console.log('cake');
-    var watchID = navigator.geolocation.watchPosition(function(position) {
-      display(lat, lon);
-    });
+    navigator.geolocation.getCurrentPosition(success, error, options);
   } else{ //Geolocation not in navigator
-    $('#button').addClass("disabled");
+    $('#button').addClass('disabled');
+    $('#panel').removeClass('hidden');
+    $('#notice').text('Unforunatly, geolocation is not supported in your browser.');
   };
 };
